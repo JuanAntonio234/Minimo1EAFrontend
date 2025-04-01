@@ -77,6 +77,7 @@
       </div>
     </div>
 
+
   <!-- Modal per crear usuaris -->
   <div class="full-screen-form" *ngIf="showCreateModal">
     <app-user-create (userCreated)="onUserCreated($event)"></app-user-create>
@@ -122,6 +123,20 @@
       </form>
     </div>
   </div>
+  
+  <!-- Modal para ver las valoraciones del usuario -->
+
+  <div class="full-screen-form view-details" *ngIf="showViewModal && selectedUser">
+    <div class="modal-header">
+      <h2>Detalls de l'usuari</h2>
+      <button class="close-btn" (click)="closeViewModal()">×</button>
+    </div>
+    <div class="modal-body user-details">
+
+<!--falta una parte-->
+    </div>
+  </div>
+
 
   <!-- Modal para veure els detalls d'usuari -->
   <div class="full-screen-form view-details" *ngIf="showViewModal && selectedUser">

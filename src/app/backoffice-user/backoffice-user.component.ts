@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { UserCreateComponent } from '../components/user-create/user-create.component';
 import { User } from '../models/user.model';
+import { RatingService } from '../services/rating.service';
 
 @Component({
   selector: 'app-users',
@@ -29,6 +30,8 @@ export class UsersComponent implements OnInit {
   showEditModal = false;
   showViewModal = false;
   selectedUser: User | null = null;
+  ratings:any[]=[];
+  showRatingsModal:boolean = false;
   
   // Dades d'exemple
   allMockUsers: User[] = [
@@ -43,7 +46,8 @@ export class UsersComponent implements OnInit {
   constructor(
     private userService: UserService,
     private dialog: MatDialog,
-    private activityService: ActivityService
+    private activityService: ActivityService,
+    private ratingService:RatingService
   ) {}
 
   ngOnInit(): void {
@@ -262,5 +266,25 @@ export class UsersComponent implements OnInit {
 
   trackByUserId(index: number, user: User): string {
     return user._id;
+  }
+
+  viewRatings(user: User): void {
+    this.selectedUser = user;
+    this.showRatingsModal = true;
+
+    this.ratingService.getRatings(user._id, 1, 10).subscribe({
+      next: (response) => {
+        this.ratings = response.ratings || [];  // Almacenar las valoraciones
+      },
+      error: (err) => {
+        console.error('Error obteniendo valoraciones:', err);
+      }
+    });
+  }
+
+  closeRatingsModal(): void {
+    this.showRatingsModal = false;
+    this.selectedUser = null;  
+    this.ratings = [];  
   }
 }

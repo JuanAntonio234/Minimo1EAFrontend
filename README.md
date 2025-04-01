@@ -50,3 +50,11 @@ Una vegada que la pàgina web està en marxa, es pot accedir a ella a través de
 ```
 http://localhost:4200/
 ```
+
+
+
+## Minimo
+
+
+falta implementar el boton para abrir el form que permite ver las valoraciones, además también falta la parte correspondiente al html de rating-list pero seguiria la logica del editar o mostrar detallae.
+El buscador falta para hacerlo se podria buscar por nombre manejando la id por el codigo
